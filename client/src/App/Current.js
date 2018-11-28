@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
+import { Route, Switch } from 'react-router-dom';
 import Fingerprint2 from 'fingerprintjs2';
 
 class App extends Component {
