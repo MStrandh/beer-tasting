@@ -16,7 +16,7 @@ class List extends Component {
 
   // Retrieves the list of items from the Express app
   getList = () => {
-    fetch('/beer/getCurrent')
+    fetch('/beer/getList')
     .then(res => res.json())
     .then(list => this.setState({ list }))
   }
@@ -34,7 +34,7 @@ class List extends Component {
             {list.map((item) => {
               return(
                 <div>
-                  {item}
+                  {item.Brewery}
                 </div>
               );
             })}
