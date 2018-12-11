@@ -4,8 +4,10 @@ const socketIo = require("socket.io");
 
 const serverHost = "192.168.0.13";
 const serverPort = process.env.PORT || 4001;
-const app = express();
 
+const DbConstants = require('./mongo-connection');
+
+const app = express();
 
 // const index = require("./routes/index");
 // app.use(index);
@@ -20,17 +22,14 @@ const userRoute = require('./routes/user.route');
 // Set up mongoose connection
 const mongoose = require('mongoose');
 
-let dev_db_url = 'mongodb://localhost:27017/beertasting';
-let mongoDB = process.env.MONGODB_URI || dev_db_url;
-
 mongoose.Promise = global.Promise;
 
-mongoose.connect(mongoDB, {
+mongoose.connect(DbConstants.MONGO_URL, {
 		useNewUrlParser: true
 	}).then(() => {
-		console.log("[MongoDB]: Connected to: " + dev_db_url);
+		console.log("[MongoDB]: Connected to Mongo DB");
 	}).catch(err => {
-		console.error.bind(console, 'MongoDB connection error:');
+		console.log('MongoDB connection error:' + err);
 		process.exit();
 });
 

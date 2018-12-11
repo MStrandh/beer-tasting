@@ -1,15 +1,34 @@
 const User = require('../models/user.model');
 
+exports.get_all = function (req, res) {
+	User.find({})
+		.then(users => {
+			if(!users) {
+				return res.status(404).send({
+					message: "No users found"
+				});
+			}
+
+			res.send(users);
+		})
+		.catch(err => {
+			return res.status(500).send({
+				message: "Error retrieving users"
+			});
+		});
+};
+
 exports.user_create = function (req, res) {
 
-	if(!req.body.name) {
+	if(!req.body.email) {
 		return res.status(400).send({
-			message: "Create user failed. Name can not be empty."
+			message: "Create user failed. Email can not be empty."
 		});
 	}
 
 	let user = new User(
 		{
+			email: req.body.email,
 			name: req.body.name,
 			fingerprint: req.body.fingerprint
 		}
@@ -76,13 +95,14 @@ exports.user_fingerprint = function (req, res) {
 
 exports.user_update = function (req, res) {
 	// Validate Request
-	if(!req.body.name) {
+	if(!req.body.email) {
 		return res.status(400).send({
-			message: "User name can not be empty"
+			message: "User email can not be empty"
 		});
 	}
 
 	let userData = {
+		email: req.body.email,
 		name: req.body.name,
 		fingerprint: req.body.fingerprint
 	};

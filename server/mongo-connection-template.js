@@ -1,1 +1,3 @@
-let mongoDBUrl = "<database URL>";
+module.exports = {
+	MONGO_URL: "<database URL>"
+};
