@@ -68,65 +68,43 @@ exports.details = function (req, res) {
 		});
 };
 
-// exports.user_fingerprint = function (req, res) {
-// 	User.findOne({"fingerprint": req.params.fingerprint}, 'name')
-// 		.then(user => {
-// 			if(!user) {
-// 				return res.status(404).send({
-// 					message: "User with fingerprint not found  " + req.params.fingerprint
-// 				});            
-// 			}
 
-// 			res.send(user);
-// 		})
-// 		.catch(err => {
-// 			if(err.kind === 'ObjectId') {
-// 				return res.status(404).send({
-// 					message: "User not found with id " + req.params.id
-// 				});                
-// 			}
+exports.update = function (req, res) {
+	// Validate Request
+	if(!req.body.name) {
+		return res.status(400).send({
+			message: "Beer name can not be empty"
+		});
+	}
 
-// 			return res.status(500).send({
-// 				message: "Error retrieving user with id " + req.params.id
-// 			});
-// 		});
-// };
+	let beerData = {
+		name: req.body.name,
+		brewery: req.body.brewery,
+		systembolaget_artno: req.body.systembolaget_artno
+	};
 
-// exports.user_update = function (req, res) {
-// 	// Validate Request
-// 	if(!req.body.name) {
-// 		return res.status(400).send({
-// 			message: "User name can not be empty"
-// 		});
-// 	}
-
-// 	let userData = {
-// 		name: req.body.name,
-// 		fingerprint: req.body.fingerprint
-// 	};
-
-// 	User.findByIdAndUpdate(req.params.id, userData, { new: true })
-// 		.then(user => {
-// 			if(!user) {
-// 				return res.status(404).send({
-// 					message: "User not found with id " + req.params.id
-// 				});
-// 			}
+	Beer.findByIdAndUpdate(req.params.id, beerData, { new: true })
+		.then(beer => {
+			if(!beer) {
+				return res.status(404).send({
+					message: "Beer not found with id " + req.params.id
+				});
+			}
 			
-// 			res.send(user);
-// 		})
-// 		.catch(err => {
-// 			if(err.kind === 'ObjectId') {
-// 				return res.status(404).send({
-// 					message: "User not found with id " + req.params.id
-// 				});                
-// 			}
+			res.send(beer);
+		})
+		.catch(err => {
+			if(err.kind === 'ObjectId') {
+				return res.status(404).send({
+					message: "Beer not found with id " + req.params.id
+				});                
+			}
 			
-// 			return res.status(500).send({
-// 				message: "Error updating user with id " + req.params.id
-// 			});
-// 		});
-// };
+			return res.status(500).send({
+				message: "Error updating beer with id " + req.params.id
+			});
+		});
+};
 
 // exports.user_delete = function (req, res) {
 // 	User.findByIdAndRemove(req.params.id)
