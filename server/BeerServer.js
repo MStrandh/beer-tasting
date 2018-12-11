@@ -17,6 +17,8 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const userRoute = require('./routes/user.route');
+const beerRoute = require('./routes/beer.route');
+
 // ---
 
 // Set up mongoose connection
@@ -36,6 +38,7 @@ mongoose.connect(DbConstants.MONGO_URL, {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/users', userRoute);
+app.use('/beers', beerRoute);
 
 
 const server = http.createServer(app);

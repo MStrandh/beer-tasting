@@ -2,10 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-    email: {type: String, required: true, max: 128},
-    name: {type: String, required: false, max: 128},
-    fingerprint: {type: String, required: false, max: 128},
-});
+		email: {type: String, required: true},
+		name: {type: String, required: false},
+		fingerprint: {type: String, required: false},
+	},
+	{ timestamps: true }
+);
 
 
 // Export the model

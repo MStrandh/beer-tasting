@@ -1,7 +1,7 @@
 const Beer = require('../models/beer.model');
 
 exports.all = function (req, res) {
-	User.find({})
+	Beer.find({})
 		.then(beers => {
 			if(!beers) {
 				return res.status(404).send({
@@ -19,7 +19,6 @@ exports.all = function (req, res) {
 };
 
 exports.create = function (req, res) {
-
 	if(!req.body.name) {
 		return res.status(400).send({
 			message: "Create beer failed. Name can not be empty."
@@ -29,7 +28,7 @@ exports.create = function (req, res) {
 	let beer = new Beer(
 		{
 			name: req.body.name,
-			brewery: req.body.brewery
+			brewery: req.body.brewery,
 			systembolaget_artno: req.body.systembolaget_artno
 		}
 	);
@@ -45,29 +44,29 @@ exports.create = function (req, res) {
 	});
 };
 
-// exports.user_details = function (req, res) {
-// 	User.findById(req.params.id)
-// 		.then(user => {
-// 			if(!user) {
-// 				return res.status(404).send({
-// 					message: "User not found with id " + req.params.id
-// 				});            
-// 			}
+exports.details = function (req, res) {
+	Beer.findById(req.params.id)
+		.then(beer => {
+			if(!beer) {
+				return res.status(404).send({
+					message: "Beer not found with id " + req.params.id
+				});            
+			}
 
-// 			res.send(user);
-// 		})
-// 		.catch(err => {
-// 			if(err.kind === 'ObjectId') {
-// 				return res.status(404).send({
-// 					message: "User not found with id " + req.params.id
-// 				});                
-// 			}
+			res.send(beer);
+		})
+		.catch(err => {
+			if(err.kind === 'ObjectId') {
+				return res.status(404).send({
+					message: "Beer not found with id " + req.params.id
+				});                
+			}
 
-// 			return res.status(500).send({
-// 				message: "Error retrieving user with id " + req.params.id
-// 			});
-// 		});
-// };
+			return res.status(500).send({
+				message: "Error retrieving beer with id " + req.params.id
+			});
+		});
+};
 
 // exports.user_fingerprint = function (req, res) {
 // 	User.findOne({"fingerprint": req.params.fingerprint}, 'name')
