@@ -106,26 +106,26 @@ exports.update = function (req, res) {
 		});
 };
 
-// exports.user_delete = function (req, res) {
-// 	User.findByIdAndRemove(req.params.id)
-// 		.then(user => {
-// 			if(!user) {
-// 				return res.status(404).send({
-// 					message: "User not found with id " + req.params.id
-// 				});
-// 			}
+exports.delete = function (req, res) {
+	Beer.findByIdAndRemove(req.params.id)
+		.then(beer => {
+			if(!beer) {
+				return res.status(404).send({
+					message: "Beer not found with id " + req.params.id
+				});
+			}
 			
-// 			res.send({message: "User deleted successfully!"});
-// 		})
-// 		.catch(err => {
-// 			if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-// 				return res.status(404).send({
-// 					message: "User not found with id " + req.params.id
-// 				});                
-// 			}
+			res.send({message: "Beer deleted successfully!"});
+		})
+		.catch(err => {
+			if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+				return res.status(404).send({
+					message: "Beer not found with id " + req.params.id
+				});                
+			}
 			
-// 			return res.status(500).send({
-// 				message: "Could not delete user with id " + req.params.id
-// 			});
-// 		});
-// };
+			return res.status(500).send({
+				message: "Could not delete beer with id " + req.params.id
+			});
+		});
+};

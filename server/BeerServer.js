@@ -18,6 +18,8 @@ const bodyParser = require('body-parser');
 
 const userRoute = require('./routes/user.route');
 const beerRoute = require('./routes/beer.route');
+const tastingRoute = require('./routes/tasting.route');
+const votingRoute = require('./routes/voting.route');
 
 // ---
 
@@ -39,6 +41,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/users', userRoute);
 app.use('/beers', beerRoute);
+app.use('/tastings', tastingRoute);
+app.use('/votings', votingRoute);
 
 
 const server = http.createServer(app);
