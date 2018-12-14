@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
+const path = require('path');
 
 const app = express();
 
@@ -43,12 +44,9 @@ app.use('/api/beers', beerRoute);
 app.use('/api/tastings', tastingRoute);
 app.use('/api/votings', votingRoute);
 
-
-const path = require('path')
-
-app.use(express.static(path.join(__dirname, '../client/public')))
+app.use(express.static(path.join(__dirname, '../build/public')))
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../client/public/index.html'))
+	res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
 
 const server = http.createServer(app);
