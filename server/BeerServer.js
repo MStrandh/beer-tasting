@@ -44,7 +44,7 @@ app.use('/api/beers', beerRoute);
 app.use('/api/tastings', tastingRoute);
 app.use('/api/votings', votingRoute);
 
-app.use(express.static(path.join(__dirname, '../build/public')))
+app.use(express.static(path.join(__dirname, '../client/build')))
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
