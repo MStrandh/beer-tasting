@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
@@ -5,7 +7,7 @@ const socketIo = require("socket.io");
 const serverHost = "192.168.0.13";
 const serverPort = process.env.PORT || 4001;
 
-const DbConstants = require('./mongo-connection');
+// const DbConstants = require('./mongo-connection');
 
 const app = express();
 
@@ -26,11 +28,9 @@ const votingRoute = require('./routes/voting.route');
 // Set up mongoose connection
 const mongoose = require('mongoose');
 
-let mongoURL = process.env.MONGO_URL || DbConstants.MONGO_URL;
-
 mongoose.Promise = global.Promise;
 
-mongoose.connect(mongoURL, {
+mongoose.connect(process.env.MONGO_URL, {
 		useNewUrlParser: true
 	}).then(() => {
 		console.log("[MongoDB]: Connected to Mongo DB");
