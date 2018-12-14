@@ -16,7 +16,7 @@ class List extends Component {
 
   // Retrieves the list of items from the Express app
   getList = () => {
-    fetch('/beer/getList')
+    fetch('/api/beers/all')
     .then(res => res.json())
     .then(list => this.setState({ list }))
   }
@@ -28,16 +28,36 @@ class List extends Component {
       <div className="App">
         <h1>List of Items</h1>
         {/* Check to see if any items are found*/}
+
         {list.length ? (
           <div>
-            {/* Render the list of items */}
-            {list.map((item) => {
-              return(
-                <div>
-                  {item.Brewery}
-                </div>
-              );
-            })}
+            <table>
+              <thead>
+                <tr>
+                  <td>
+                      <h3>Bryggeri</h3>
+                    </td>
+                    <td>
+                      <h3>Öl</h3>
+                    </td>
+                </tr>
+              </thead>
+              <tbody>
+              {/* Render the list of items */}
+              {list.map((item) => {
+                return(
+                  <tr>
+                    <td>
+                      {item.brewery}
+                    </td>
+                    <td>
+                      {item.name}
+                    </td>
+                  </tr>
+                );
+              })}
+              </tbody>
+            </table>
           </div>
         ) : (
           <div>

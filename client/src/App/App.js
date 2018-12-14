@@ -46,8 +46,6 @@ class App extends Component {
 	}
 
 	render() {
-		console.log("DUNDER Å BRAK");
-
 		const {fpsignature} = this.state;
 
 		if(!fpsignature) {

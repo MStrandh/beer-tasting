@@ -38,10 +38,10 @@ mongoose.connect(process.env.MONGO_URL, {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/users', userRoute);
-app.use('/beers', beerRoute);
-app.use('/tastings', tastingRoute);
-app.use('/votings', votingRoute);
+app.use('/api/users', userRoute);
+app.use('/api/beers', beerRoute);
+app.use('/api/tastings', tastingRoute);
+app.use('/api/votings', votingRoute);
 
 
 const path = require('path')
