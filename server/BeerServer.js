@@ -26,9 +26,11 @@ const votingRoute = require('./routes/voting.route');
 // Set up mongoose connection
 const mongoose = require('mongoose');
 
+let mongoURL = process.env.MONGO_URL || DbConstants.MONGO_URL;
+
 mongoose.Promise = global.Promise;
 
-mongoose.connect(DbConstants.MONGO_URL, {
+mongoose.connect(mongoURL, {
 		useNewUrlParser: true
 	}).then(() => {
 		console.log("[MongoDB]: Connected to Mongo DB");
