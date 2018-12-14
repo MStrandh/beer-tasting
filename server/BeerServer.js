@@ -6,6 +6,8 @@ const socketIo = require("socket.io");
 
 const app = express();
 
+let serverPort = process.env.PORT || 4001;
+
 // const index = require("./routes/index");
 // app.use(index);
 
