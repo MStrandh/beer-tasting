@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Fingerprint2 from 'fingerprintjs2';
+// import Fingerprint2 from 'fingerprintjs2';
 
 import './App.css';
 
 import Home from './pages/Home';
 import List from './pages/List';
-import Auth from './pages/Auth';
+// import Auth from './pages/Auth';
 
 class App extends Component {
 	constructor(props){
@@ -20,19 +20,19 @@ class App extends Component {
 	{
 		const stuff = this;
 
-		const getmefingerprint2 = async () => {
-			const secure = await (new Promise(resolve => {
-				new Fingerprint2().get((result, components) => resolve(result) );
-			}));
+		// const getmefingerprint2 = async () => {
+		// 	const secure = await (new Promise(resolve => {
+		// 		new Fingerprint2().get((result, components) => resolve(result) );
+		// 	}));
 			
-			// do things with secure, whatever you return is thenable
-			return secure;
-		};
+		// 	// do things with secure, whatever you return is thenable
+		// 	return secure;
+		// };
 
-		getmefingerprint2().then(result => {
-			console.log("WIN: " + result)
-			stuff.setState({fpsignature: result});
-		})
+		// getmefingerprint2().then(result => {
+		// 	console.log("WIN: " + result)
+		// 	stuff.setState({fpsignature: result});
+		// })
 
 		// let promise = new Promise(function(resolve, reject) {
 		// 	new Fingerprint2().get(resolve);
@@ -46,19 +46,17 @@ class App extends Component {
 	}
 
 	render() {
-		const {fpsignature} = this.state;
+		// const {fpsignature} = this.state;
 
-		if(!fpsignature) {
-			return <div/>;
-		}
+		// if(!fpsignature) {
+		// 	return <div/>;
+		// }
 
 		const App = () => (
 			<div>
-				<h3> {fpsignature} </h3>
 				<Switch>
 					<Route exact path='/' component={Home} />
 					<Route path='/list' component={List} />
-					<Route path='/auth' component={() => <Auth fingerprint={fpsignature} />} />
 				</Switch>
 			</div>
 		);
