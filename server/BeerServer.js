@@ -4,11 +4,6 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 
-const serverHost = "192.168.0.13";
-const serverPort = process.env.PORT || 4001;
-
-// const DbConstants = require('./mongo-connection');
-
 const app = express();
 
 // const index = require("./routes/index");
@@ -46,6 +41,13 @@ app.use('/beers', beerRoute);
 app.use('/tastings', tastingRoute);
 app.use('/votings', votingRoute);
 
+
+const path = require('path')
+
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 const server = http.createServer(app);
 
