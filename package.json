@@ -4,6 +4,6 @@
 		"npm": "6.x"
 	},
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server/BeerServer.js"
 	}
 }
