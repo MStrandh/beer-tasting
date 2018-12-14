@@ -1,12 +1,12 @@
 const Voting = require('../models/voting.model');
 
-exports.add = function (req, res) {
+exports.user_cast = function (req, res) {
 	let voting = new Voting(
 		{
 			tasting: req.body.tasting,
 			user: req.body.user,
-			beer: req.body.beer,
 			tasting_order_no: req.body.tasting_order_no,
+			beer: req.body.beer,
 			rating: req.body.rating
 		}
 	);
@@ -22,12 +22,10 @@ exports.add = function (req, res) {
 	});
 };
 
-exports.details = function (req, res) {
+exports.user_details = function (req, res) {
 	Voting.find({"user": req.params.id})
 		.sort({tasting_order_no: 'asc'})
-		.populate("tastings")
-		.populate("user")
-		.populate("beers", ["name", "brewery"])
+		.populate("beer", ["name", "brewery"])
 		.then(voting => {
 			if(!voting) {
 				return res.status(404).send({
@@ -46,6 +44,35 @@ exports.details = function (req, res) {
 
 			return res.status(500).send({
 				message: "Error retrieving voting with id " + req.params.id
+			});
+		});
+};
+
+exports.vote_update = function (req, res) {
+	let voteData = {
+		beer: req.body.beer,
+		rating: req.body.rating
+	};
+
+	Voting.findByIdAndUpdate(req.params.id, voteData, { new: true })
+		.then(vote => {
+			if(!vote) {
+				return res.status(404).send({
+					message: "Vote not found with id " + req.params.id
+				});
+			}
+			
+			res.send(vote);
+		})
+		.catch(err => {
+			if(err.kind === 'ObjectId') {
+				return res.status(404).send({
+					message: "Vote not found with id " + req.params.id
+				});                
+			}
+			
+			return res.status(500).send({
+				message: "Error updating vote with id " + req.params.id
 			});
 		});
 };
