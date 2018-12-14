@@ -22,7 +22,7 @@ exports.user_cast = function (req, res) {
 	});
 };
 
-exports.user_details = function (req, res) {
+exports.user_getVotes = function (req, res) {
 	Voting.find({"user": req.params.id})
 		.sort({tasting_order_no: 'asc'})
 		.populate("beer", ["name", "brewery"])

@@ -99,3 +99,42 @@ exports.details = function (req, res) {
 			});
 		});
 };
+
+exports.getActive = function (req, res) {
+	Tasting.findOne({is_active: true})
+		.then(tasting => {
+			if(!tasting) {
+				return res.status(404).send({
+					message: "No active tasting found"
+				});            
+			}
+
+			res.send(tasting);
+		})
+		.catch(err => {
+			if(err.kind === 'ObjectId') {
+				return res.status(404).send({
+					message: "No active tasting found"
+				});                
+			}
+
+			return res.status(500).send({
+				message: "No active tasting found"
+			});
+		});
+};
+
+exports.getNumBeers = function (req, res) {
+	Tasting.findById(req.params.id)
+		.then(tasting => {
+			let numBeers = tasting.beers.length;
+			res.send({"count": numBeers});
+		});
+};
+
+exports.getCurrentBeer = function (req, res) {
+	Tasting.findById(req.params.id)
+		.then(tasting => {
+			res.send({"current": tasting.current_beer});
+		});
+};
