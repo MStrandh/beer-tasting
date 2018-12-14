@@ -1,18 +1,21 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node BeerServer.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "mongoose": "^5.3.15",
-    "mongoose-simple-random": "^0.4.1",
-    "socket.io": "^2.1.1"
-  }
+	"name": "server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node BeerServer.js"
+	},
+	"engines": {
+		"node": "11.3.0"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"body-parser": "^1.18.3",
+		"express": "^4.16.4",
+		"mongoose": "^5.3.15",
+		"mongoose-simple-random": "^0.4.1",
+		"socket.io": "^2.1.1"
+	}
 }
