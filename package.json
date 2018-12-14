@@ -1,0 +1,9 @@
+{
+	"engines": {
+		"node": "11.3.0",
+		"npm": "6.x"
+	},
+	"scripts": {
+		"start": "node server.js"
+	}
+}
